@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php 
+
+#Utama
+RewriteRule ^index.html?$ client.php [L]
+RewriteRule ^logout.html?$ logout.php [L]
+RewriteRule ^booking.html?$ client.php?page=booking [L]
+RewriteRule ^transaksi.html?$ client.php?page=transaksi [L]
+RewriteRule ^login.html?$ client.php?page=login [L]
+RewriteRule ^register.html?$ client.php?page=register [L]
+RewriteRule ^detail/([A-Za-z0-9-]+).html?$ client.php?page=detail&id=$1 [L]
+RewriteRule ^order/([A-Za-z0-9-]+).html?$ client.php?page=order&id=$1 [L]
+RewriteRule ^invoice/([A-Za-z0-9-]+).html?$ client.php?page=invoice&id=$1 [L]
+
+
+#Bagian WebService
+RewriteRule ^api/id/order?$ admin/webservice.php?request=id&modules=order [L]
+
+Options All -Indexes
+</IfModule>

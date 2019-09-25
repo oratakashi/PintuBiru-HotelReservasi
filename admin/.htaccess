@@ -1,0 +1,35 @@
+<IfModule mod_rewrite.c>
+
+#   File ini digunakan untuk Routing
+#   Routing berfungsi untuk mengredirect url ke url tertentu
+#   contoh kamar.html sebenernya tidak ada file bernama kamar.html
+#   maka dari itu dengan file ini jika url meminta kamar.html maka akan di 
+#   redirect ke index.php?page=kamar
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php 
+
+#Utama
+RewriteRule ^login.html?$ login.php [L]
+RewriteRule ^logout.html?$ logout.php [L]
+RewriteRule ^index.html?$ index.php [L]
+RewriteRule ^administrator.html?$ index.php?page=administrator [L]
+RewriteRule ^kamar.html?$ index.php?page=kamar [L]
+RewriteRule ^food.html?$ index.php?page=food [L]
+
+#Bagian WebService
+RewriteRule ^api/detail/administrator/([A-Za-z0-9-]+)?$ webservice.php?request=detail&modules=administrator&id=$1 [L]
+RewriteRule ^api/detail/kamar/([A-Za-z0-9-]+)?$ webservice.php?request=detail&modules=kamar&id=$1 [L]
+RewriteRule ^api/detail/food/([A-Za-z0-9-]+)?$ webservice.php?request=detail&modules=food&id=$1 [L]
+RewriteRule ^api/administrator/delete/([A-Za-z0-9-]+)?$ index.php?page=administrator&id=$1 [L]
+RewriteRule ^api/id/kamar?$ webservice.php?request=id&modules=kamar [L]
+RewriteRule ^api/delete/kamar/([A-Za-z0-9-]+)?$ webservice.php?request=delete&modules=kamar&id=$1 [L]
+RewriteRule ^api/delete/food/([A-Za-z0-9-]+)?$ webservice.php?request=delete&modules=food&id=$1 [L]
+
+
+#Menghandle Agar Tidak Nyasar / Redirect ke Halaman 404
+RewriteRule ^([0-9a-zA-Z-]+)/$ index.php?page=$1 [L] 
+Options All -Indexes
+</IfModule>
