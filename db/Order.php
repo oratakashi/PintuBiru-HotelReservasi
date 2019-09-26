@@ -40,6 +40,14 @@
             $stmt->execute();
             return $stmt;
         }
+
+        public function konfirmasi($id)
+        {
+            $sql = "UPDATE tb_trans_rooms set status_trans = 'waiting', modify_date = CURRENT_TIMESTAMP where id_trans='$id'";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt;
+        }
     }
     
 ?>

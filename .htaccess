@@ -19,6 +19,7 @@ RewriteRule ^invoice/([A-Za-z0-9-]+).html?$ client.php?page=invoice&id=$1 [L]
 #Bagian WebService
 RewriteRule ^api/id/order?$ admin/webservice.php?request=id&modules=order [L]
 RewriteRule ^api/detail/transaksi/([A-Za-z0-9-]+)?$ admin/webservice.php?request=detail&modules=transaksi&id=$1 [L]
+RewriteRule ^api/konfirmasi/transaksi/([A-Za-z0-9-]+)?$ admin/webservice.php?request=konfirmasi&modules=order&id=$1 [L]
 
 Options All -Indexes
 </IfModule>

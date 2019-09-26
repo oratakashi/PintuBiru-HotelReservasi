@@ -57,10 +57,17 @@
                 $result['id_room'] = $data['id_room'];
                 $result['id_costumer'] = $data['id_costumer'];
                 $result['total'] = $data['total'];
-                $result['status'] = $data['status'];
+                $result['status_trans'] = $data['status_trans'];
                 $result['modify_date'] = $data['modify_date'];
                 $result['selisih_tgl'] = $data['selisih_tgl'];
-                print_r($data);
+
+                $date1 = date_create($result['check_in']);
+                $date2 = date_create($result['check_out']);
+                
+                //difference between two dates
+                $diff = date_diff($date1,$date2);
+
+                $result['jml_malam'] = $diff->d." Malam";
                 echo json_encode($result);
             }
         }
@@ -137,6 +144,16 @@
                     $result['status'] = 500;
                     $result['messages'] = 'Server Error!';
                 }
+
+                echo json_encode($result);
+            }
+        }
+
+        elseif($_GET['request']=='konfirmasi'){
+            if($_GET['modules']=='order'){
+                _getClass('Order')->konfirmasi($_GET['id']);
+                $result['status'] = 200;
+                $result['messages'] = 'Success';
 
                 echo json_encode($result);
             }

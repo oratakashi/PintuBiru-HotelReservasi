@@ -37,14 +37,16 @@
                                 <td><?=date('d F Y', strtotime($row['check_in']))?></td>
                                 <td><?=date('d F Y', strtotime($row['check_out']))?></td>
                                 <td>
-                                    <?php if($row['status']=='pending'){ ?>
+                                    <?php if($row['status_trans']=='pending'){ ?>
                                         <span class="badge badge-warning">Menunggu Pembayaran</span>
-                                    <?php }elseif($row['status']=='check_in'){ ?>
+                                    <?php }elseif($row['status_trans']=='check_in'){ ?>
                                         <span class="badge badge-primary">Sedang Berlangsung</span>
-                                    <?php }elseif($row['status']=='check_out'){ ?>
+                                    <?php }elseif($row['status_trans']=='check_out'){ ?>
                                         <span class="badge badge-success">Selesai Cek Out</span>
-                                    <?php }elseif($row['status']=='cancel'){ ?>
+                                    <?php }elseif($row['status_trans']=='cancel'){ ?>
                                         <span class="badge badge-danger">Dibatalkan</span>
+                                    <?php }elseif($row['status_trans']=='waiting'){ ?>
+                                        <span class="badge badge-info">Telah di bayar</span>
                                     <?php } ?>
                                 </td>
                                 <td>
@@ -71,7 +73,7 @@
                         </div>
                         <div class="col-md-6">
                             <h5>Tagihan Pembayaran</h5>
-                            <h2 class="text-primary">ID</h2>
+                            <h2 class="text-primary" id="no_inv">ID</h2>
                             <hr style="margin-top:10px;margin-bottom:10px"/>
                             <h6>Detail Pemesanan</h6>
                             <table class="table">
@@ -80,26 +82,18 @@
                                     <td><?= $_SESSION['nama'] ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Nama Kamar</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Harga Permalam</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
                                     <td>Tanggal Cek In</td>
-                                    <td></td>
+                                    <td id="cek_in"></td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Cek Out</td>
-                                    <td>/td>
+                                    <td id="cek_out">/td>
                                 </tr>
                             </table>
                             <hr style="margin-top:10px;margin-bottom:10px"/>
                             <div class="text-right">
-                                <p></p>
-                                <h3 class="text-primary">Rp. </h3>
+                                <p id="jml_mlm"></p>
+                                <h3 class="text-primary" id="total_harga">Rp. </h3>
                             </div>
                             <div id="konfirmasi">
                                 <hr style="margin-top:10px;margin-bottom:10px"/>
@@ -129,9 +123,33 @@
                 url: "api/detail/transaksi/"+id,
                 dataType: "json",
                 success: function (response) {
-                    console.log(response);
+                    $('#no_inv').html(response.id_trans);
+                    $('#cek_in').html(response.check_in);
+                    $('#cek_out').html(response.check_out);
+                    $('#jml_mlm').html(response.jml_malam);
+                    $('#total_harga').html("Rp. "+response.total);
+                    if(response.status_trans != 'pending'){
+                        $('#konfirmasi').slideUp();
+                    }else{
+                        $('#konfirmasi').slideDown();
+                    }
+                    $('#btnConfirm').attr("onclick", "konfirmasi('"+response.id_trans+"')");
                     $('#btnCancel').fadeIn();
                     $('#detail-section').fadeIn();
+                }
+            });
+        }
+
+        function konfirmasi(id) { 
+            $('#btnConfirm').html('Memproses Transaksi');
+            $.ajax({
+                type: "get",
+                url: "api/konfirmasi/transaksi/"+id,
+                dataType: "json",
+                success: function (response) {
+                    if(response.status == 200){
+                        window.location.replace('transaksi.html');
+                    }
                 }
             });
         }
