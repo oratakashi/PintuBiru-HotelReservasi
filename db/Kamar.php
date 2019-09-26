@@ -14,6 +14,13 @@
             $stmt->execute();
             return $stmt;
         }
+        public function read_limit($limit)
+        {
+            $sql = "SELECT * from tb_room limit $limit";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt;
+        }
 
         public function read_detail($id)
         {
@@ -26,6 +33,13 @@
         public function read_photo($id)
         {
             $sql = "SELECT * from tb_photos where id_room='$id'";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt;
+        }
+        public function read_photo_limit($id, $limit)
+        {
+            $sql = "SELECT * from tb_photos where id_room='$id' limit $limit";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt;

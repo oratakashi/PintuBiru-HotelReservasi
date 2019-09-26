@@ -177,17 +177,26 @@
             </div>
           </div>
           <div class="row">
+            <?php 
+              require 'db/Kamar.php';
+              $kamar = new Kamar();
+
+              $data = $kamar->read_limit(3)->fetchAll(PDO::FETCH_ASSOC);
+              foreach($data as $row){ 
+                $photo = $kamar->read_photo_limit($row['id_room'], 1)->fetch(PDO::FETCH_ASSOC);
+            ?>
             <div class="col-md-6 col-lg-4" data-aos="fade-up">
               <a href="#" class="room">
                 <figure class="img-wrap">
-                  <img src="images/img_1.jpg" alt="Free website template" class="img-fluid mb-3">
+                  <img src="media/kamar/<?= $photo['photos'] ?>" alt="Free website template" class="img-fluid mb-3">
                 </figure>
                 <div class="p-3 text-center room-info">
-                  <h2>Single Room</h2>
-                  <span class="text-uppercase letter-spacing-1">90$ / per night</span>
+                  <h2><?= $row['nama_room'] ?></h2>
+                  <span class="text-uppercase letter-spacing-1">Rp. <?= $row['harga'] ?> / per malam</span>
                 </div>
               </a>
             </div>
+            <?php } ?>
           </div>
         </div>
       </section>
@@ -198,7 +207,10 @@
         <div class="row justify-content-center text-center mb-5">
             <div class="col-md-7">
               <h2 class="heading" data-aos="fade-up">Contact Us</h2>
-              <p data-aos="fade-up">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+              <p data-aos="fade-up">Seperti bintang-bintang yang hilang ditengah malam, bagai harus melangkah tanpa ku tau arah. 
+                Seperti dedaunan berjatuhan di taman, Bagaikan debur ombak mampu pecahkan karang, tidak ada yang sempurna di dunia ini,
+                begitu pula situs ini, silahkan beri masukan ke pengembang jika terdapat kekurangan di situs ini
+              </p>
             </div>
           </div>
         <div class="row">
