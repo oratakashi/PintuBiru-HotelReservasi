@@ -3,9 +3,9 @@
      * Memanggil file file yang di perlukan
      */
 
-     require 'db/Order.php';
+     //require 'db/Order.php';
 
-     $order = new Order();
+     //$order = new Order();
 
      if(empty($_POST)){
          echo "<script>window.location.replace('booking.html')</script>";
