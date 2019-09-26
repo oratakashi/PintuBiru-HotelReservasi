@@ -71,7 +71,7 @@
                 <div class="card-body" id="detail-section">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="assets/transaksi.svg" alt="">
+                            <img src="../assets/transaksi.svg" alt="">
                         </div>
                         <div class="col-md-6">
                             <h5>Tagihan Pembayaran</h5>
