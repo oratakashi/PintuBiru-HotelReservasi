@@ -41,9 +41,10 @@
                             <?php 
                                 /**
                                  * Script ini untuk mengambil ID dari file webservice.php
+                                 * Untuk pintubiru.herokuapp.com silahkan ganti localhost/nama_folder
                                  */
                                 $ch = curl_init();
-                                curl_setopt($ch, CURLOPT_URL, "http://localhost/hotel/api/id/order");
+                                curl_setopt($ch, CURLOPT_URL, "http://pintubiru.herokuapp.com/api/id/order");
                                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                 $result = curl_exec($ch);
                                 curl_close($ch);
