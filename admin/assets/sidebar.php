@@ -26,7 +26,6 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Kelola Fasilitas</span></a>
                 <ul class="dropdown-menu">
                     <li class="<?php if($_GET['page']=='kamar'){echo "active";}?>"><a class="nav-link" href="kamar.html">Kelola Kamar</a></li>
-                    <li class="<?php if($_GET['page']=='food'){echo "active";}?>"><a class="nav-link" href="food.html">Kelola Menu Restaurant</a></li>
                 </ul>
             </li>
             <li class="menu-header">Transaksi</li>
@@ -34,7 +33,6 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check"></i> <span>Lihat Transaksi</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="auth-forgot-password.html">Transaksi Sewa Kamar</a></li>
-                    <li><a href="auth-forgot-password.html">Transaksi Restaurant</a></li>
                 </ul>
             </li>
         </ul>

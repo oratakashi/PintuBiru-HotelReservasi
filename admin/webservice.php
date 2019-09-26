@@ -49,14 +49,19 @@
                     $result['status'] = 500;
                     $result['messages'] = 'Data Empty';
                 }
-            }elseif($_GET['modules']=='food'){
-                $data = _getClass('Resto')->read_detail($_GET['id']);
-                if($data->rowCount()>0){
-                    echo json_encode($data->fetch(PDO::FETCH_ASSOC));
-                }else{
-                    $result['status'] = 500;
-                    $result['messages'] = 'Data Empty';
-                }
+            }elseif($_GET['modules']=='transaksi'){
+                $data = _getClass('Order')->read_detail($_GET['id'])->fetch(PDO::FETCH_ASSOC);
+                $result['id_trans'] = $data['id_trans'];
+                $result['check_in'] = date('Y-m-d', strtotime($data['check_in']));
+                $result['check_out'] = date('Y-m-d', strtotime($data['check_out']));
+                $result['id_room'] = $data['id_room'];
+                $result['id_costumer'] = $data['id_costumer'];
+                $result['total'] = $data['total'];
+                $result['status'] = $data['status'];
+                $result['modify_date'] = $data['modify_date'];
+                $result['selisih_tgl'] = $data['selisih_tgl'];
+                print_r($data);
+                echo json_encode($result);
             }
         }
         /**
@@ -89,6 +94,7 @@
                     }else{
                         break;
                     }
+                    $position++;
                 }
                 
                 $result = array();
@@ -132,20 +138,6 @@
                     $result['messages'] = 'Server Error!';
                 }
 
-                echo json_encode($result);
-            }elseif($_GET['modules']=='food'){
-                $data = _getClass('Resto')->read_detail($_GET['id'])->fetch(PDO::FETCH_ASSOC);
-                if(file_exists("../media/food/".$data['photo'])){
-                    unlink("../media/food/".$data['photo']);
-                }
-                $result = array();
-                if(_getClass('Resto')->delete($_GET['id'])){
-                    $result['status'] = 200;
-                    $result['messages'] = 'Delete Success';
-                }else{
-                    $result['status'] = 500;
-                    $result['messages'] = 'Server Error!';
-                }
                 echo json_encode($result);
             }
         }
