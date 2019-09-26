@@ -10,9 +10,9 @@
     <?php 
         /**
          * Untuk mendapatkan lokasi host saat ini
-         * biasany localhost/hotel, jika nama folder d ganti otomatis mendetaksi
+         * Silahkan ganti localhost/nama_foldernya
          */
-        $base_url = "http://localhost/hotel/";
+        $base_url = "http://pintubiru.herokuapp.com/";
     ?>
     <base href="<?= $base_url ?>">
   <!-- General CSS Files -->
