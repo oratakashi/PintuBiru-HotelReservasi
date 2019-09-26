@@ -37,6 +37,7 @@
 
       <!-- Theme Style -->
       <link rel="stylesheet" href="css/style.css">
+      <script src="js/jquery-3.3.1.min.js"></script>
     </head>
     <body data-spy="scroll" data-target="#templateux-navbar" data-offset="200">
 
@@ -56,7 +57,11 @@
             <li class="nav-item"><a class="nav-link" href="#section-about">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#section-rooms">Rooms</a></li>
             <li class="nav-item"><a class="nav-link" href="#section-contact">Contact</a></li>
-            <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="booking.html" ><span class="pb_rounded-4 px-4 rounded">Reservasi</span></a></li>
+            <?php if(empty($_SESSION['id_costumer'])){ ?>
+              <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="booking.html" ><span class="pb_rounded-4 px-4 rounded">Reservasi</span></a></li>
+              <?php }else{ ?>
+                <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="booking.html" ><span class="pb_rounded-4 px-4 rounded">Halaman Member</span></a></li>
+            <?php } ?>
           </ul>
         </div>
       </div>
@@ -150,9 +155,12 @@
               <img src="images/hero_4.jpg" alt="Image" class="img-fluid rounded">
             </div>
             <div class="col-md-12 col-lg-4 order-lg-1" data-aos="fade-up">
-              <h2 class="heading mb-4">Hey there!</h2>
-              <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-              <p><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="btn btn-primary text-white py-2 mr-3 text-uppercase letter-spacing-1">Watch the video</a></p>
+              <h2 class="heading mb-4">Perkenalkan Pintu<span class="text-danger">Biru</span>!</h2>
+              <p class="mb-5">
+                Pintu<span class="text-danger">Biru</span> merupakan hotel yang terletak di jantung kota.
+                letaknya yang strategis membuat Pintu<span class="text-danger">Biru</span> banyak di minati oleh wisatawan
+                lokal maupun wisatawan manca negara
+              </p>
             </div>
             
           </div>
@@ -196,14 +204,14 @@
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             
-            <form method="post" class="bg-white p-md-5 p-4 mb-5 border">
+            <form method="post" id="form-contact" class="bg-white p-md-5 p-4 mb-5 border">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label for="name">Name</label>
+                  <label for="name">Nama</label>
                   <input type="text" name="name" id="name" class="form-control ">
                 </div>
                 <div class="col-md-6 form-group">
-                  <label for="phone">Phone</label>
+                  <label for="phone">No Hp</label>
                   <input type="text" name="phone" id="phone" class="form-control ">
                 </div>
               </div>
@@ -216,7 +224,7 @@
               </div>
               <div class="row mb-4">
                 <div class="col-md-12 form-group">
-                  <label for="message">Write Message</label>
+                  <label for="message">Tulis Kritk ataupun saran</label>
                   <textarea name="message" name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
                 </div>
               </div>
@@ -226,10 +234,14 @@
                   <div class="submitting"></div>
                 </div>
               </div>
-
-             
             </form>
-
+            <script>
+              $('#form-contact').submit(function (e) { 
+                e.preventDefault();
+                alert('Kritik dan Pesan anda sudah terkirim, Terima kasih telah memberi masukan pada kami');
+                window.location.replace('');
+              });
+            </script>
             
 
           </div>
@@ -260,60 +272,14 @@
         </div>
       </section>
 
-      <footer class="section footer-section">
-        <div class="container">
-          <div class="row mb-4">
-            <div class="col-md-3 mb-5">
-              <ul class="list-unstyled link">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Terms &amp; Conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-               <li><a href="#">Rooms</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3 mb-5">
-              <ul class="list-unstyled link">
-                <li><a href="#">The Rooms &amp; Suites</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Restaurant</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3 mb-5 pr-md-5 contact-info">
-              <!-- <li>198 West 21th Street, <br> Suite 721 New York NY 10016</li> -->
-              <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span> 198 West 21th Street, <br> Suite 721 New York NY 10016</span></p>
-              <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span> (+1) 435 3533</span></p>
-              <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> info@yourdomain.com</span></p>
-            </div>
-            <div class="col-md-3 mb-5">
-              <p>Sign up for our newsletter</p>
-              <form action="#" class="footer-newsletter">
-                <div class="form-group">
-                  <input type="email" class="form-control" placeholder="Email...">
-                  <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="row pt-5">
-            <p class="col-md-8 text-left">
+      <footer style="height:30px">
+      <p class="text-center">
               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart text-primary" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
-              
-            <p class="col-md-4 text-right social">
-              <a href="#"><span class="fa fa-tripadvisor"></span></a>
-              <a href="#"><span class="fa fa-facebook"></span></a>
-              <a href="#"><span class="fa fa-twitter"></span></a>
-              <a href="#"><span class="fa fa-linkedin"></span></a>
-              <a href="#"><span class="fa fa-vimeo"></span></a>
-            </p>
-          </div>
-        </div>
       </footer>
       
-      <script src="js/jquery-3.3.1.min.js"></script>
       <script src="js/jquery-migrate-3.0.1.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.min.js"></script>

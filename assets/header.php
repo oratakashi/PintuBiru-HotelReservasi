@@ -30,52 +30,48 @@
                 <div class="dropdown-header">Transaksi
                 </div>
                 <div class="dropdown-list-content dropdown-list-icons">
-                    <a href="#" class="dropdown-item dropdown-item-unread">
-                        <div class="dropdown-item-icon bg-primary text-white">
-                        <i class="fas fa-code"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                        Template update is available now!
-                        <div class="time text-primary">2 Min Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-icon bg-info text-white">
-                        <i class="far fa-user"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                        <b>You</b> and <b>Dedik Sugiharto</b> are now friends
-                        <div class="time">10 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-icon bg-success text-white">
-                        <i class="fas fa-check"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                        <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
-                        <div class="time">12 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-icon bg-danger text-white">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                        Low disk space. Let's clean it!
-                        <div class="time">17 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-icon bg-info text-white">
-                        <i class="fas fa-bell"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                        Welcome to Stisla template!
-                        <div class="time">Yesterday</div>
-                        </div>
-                    </a>
-                    </div>
+                    <?php 
+                        require_once 'db/Order.php';
+
+                        $order = new Order(); 
+
+                        $data = $order->read_user_limit($_SESSION['id_costumer'])->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach($data as $row){
+                    ?>
+                        <a href="#" class="dropdown-item <?php if($row['status_trans']=='pending'){echo "dropdown-item-unread";} ?>">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    Kamar <?= $row['nama_room'] ?>
+                                    <div class="time text-primary">
+                                        <?php 
+                                            if($row['selisih_tgl']==0){
+                                                echo "Hari ini";
+                                            }elseif($row['selisih_tgl']==1){
+                                                echo "Kemarin";
+                                            }else{
+                                                echo $row['selisih_tgl']." Hari yang lalu";
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <?php if($row['status_trans']=='pending'){ ?>
+                                        <span class="badge badge-warning">Pending</span>
+                                    <?php }elseif($row['status_trans']=='waiting'){ ?>
+                                        <span class="badge badge-info">Menunggu</span>
+                                    <?php }elseif($row['status_trans']=='check_in'){ ?>
+                                        <span class="badge badge-primary">Berlangsung</span>
+                                    <?php }elseif($row['status_trans']=='check_out'){ ?>
+                                        <span class="badge badge-success">Selesai</span>
+                                    <?php }elseif($row['status_trans']=='cancel'){ ?>
+                                        <span class="badge badge-danger">Batal</span>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </a>
+                    <?php } ?>
+                </div>
                 <div class="dropdown-footer text-center">
                     <a href="transaksi.html">Lihat yang lain <i class="fas fa-chevron-right"></i></a>
                 </div>
@@ -86,9 +82,6 @@
             <div class="d-sm-none d-lg-inline-block">Hi, <?= $_SESSION['nama'] ?></div></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title"><?= $_SESSION['email'] ?></div>
-                <a href="features-profile.html" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> Profile
-                </a>
                 <div class="dropdown-divider"></div>
                 <a href="logout.html" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout

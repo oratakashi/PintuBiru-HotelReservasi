@@ -97,7 +97,7 @@
                             $data = $data->fetch(PDO::FETCH_ASSOC);
                             $_SESSION['id_admin'] = $data['id_admin'];
                             $_SESSION['nama'] = $data['nama'];
-                            $_SESSION['lev_user'] = $data['lev_user'];
+                            $_SESSION['email'] = $data['email'];
                             $_SESSION['photo'] = $data['photo'];
                             header('location: index.html');
                         }else{

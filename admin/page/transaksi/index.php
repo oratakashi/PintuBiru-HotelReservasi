@@ -3,11 +3,11 @@
      * Memanggil file file yang di perlukan
      */
     
-    require_once 'db/Order.php';
+    require_once '../db/Order.php';
 
     $order = new Order();
 
-    $data = $order->read_user($_SESSION['id_costumer'])->fetchAll(PDO::FETCH_ASSOC);
+    $data = $order->read()->fetchAll(PDO::FETCH_ASSOC);
      
 ?>
 <div class="main-content">
@@ -23,6 +23,7 @@
                         <thead>
                             <tr>
                                 <th>No Invoice</th>
+                                <th>Atas Nama</th>
                                 <th>Tgl Cek In</th>
                                 <th>Tgl Cek Out</th>
                                 <th>Status</th>
@@ -34,6 +35,7 @@
                             <?php foreach($data as $row){ ?>
                             <tr>
                                 <td><?= $row['id_trans'] ?></td>
+                                <td><?= $row['nama_costumer'] ?></td>
                                 <td><?=date('d F Y', strtotime($row['check_in']))?></td>
                                 <td><?=date('d F Y', strtotime($row['check_out']))?></td>
                                 <td>
@@ -79,7 +81,7 @@
                             <table class="table">
                                 <tr>
                                     <td>Atas Nama</td>
-                                    <td><?= $_SESSION['nama'] ?></td>
+                                    <td id="atas_nama"></td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Cek In</td>
@@ -94,10 +96,6 @@
                             <div class="text-right">
                                 <p id="jml_mlm"></p>
                                 <h3 class="text-primary" id="total_harga">Rp. </h3>
-                            </div>
-                            <div id="konfirmasi">
-                                <hr style="margin-top:10px;margin-bottom:10px"/>
-                                <button onclick="" id="btnConfirm" class="btn btn-primary float-right">Konfirmasi Pembayaran</button>
                             </div>
                         </div>
                     </div> 
@@ -125,6 +123,7 @@
                 success: function (response) {
                     $('#no_inv').html(response.id_trans);
                     $('#cek_in').html(response.check_in);
+                    $('#atas_nama').html(response.nama_costumer);
                     $('#cek_out').html(response.check_out);
                     $('#jml_mlm').html(response.jml_malam);
                     $('#total_harga').html("Rp. "+response.total);
@@ -136,20 +135,6 @@
                     $('#btnConfirm').attr("onclick", "konfirmasi('"+response.id_trans+"')");
                     $('#btnCancel').fadeIn();
                     $('#detail-section').fadeIn();
-                }
-            });
-        }
-
-        function konfirmasi(id) { 
-            $('#btnConfirm').html('Memproses Transaksi');
-            $.ajax({
-                type: "get",
-                url: "api/konfirmasi/transaksi/"+id,
-                dataType: "json",
-                success: function (response) {
-                    if(response.status == 200){
-                        window.location.replace('transaksi.html');
-                    }
                 }
             });
         }

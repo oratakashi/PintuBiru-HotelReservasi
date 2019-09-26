@@ -33,9 +33,32 @@
             return $stmt;
         }
 
+        public function read()
+        {
+            $sql = "SELECT *, DATEDIFF(CURRENT_DATE, modify_date) as selisih_tgl from tb_trans_rooms a, tb_costumer b where a.id_costumer=b.id_costumer";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt;
+        }
+
+        public function read_user_limit($id)
+        {
+            $sql = "SELECT *, DATEDIFF(CURRENT_DATE, modify_date) as selisih_tgl from tb_trans_rooms a, tb_room b where a.id_room=b.id_room and a.id_costumer = '$id' order by a.modify_date desc limit 3";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt;
+        }
+        public function read_limit()
+        {
+            $sql = "SELECT *, DATEDIFF(CURRENT_DATE, modify_date) as selisih_tgl from tb_trans_rooms a, tb_room b where a.id_room=b.id_room  order by a.modify_date desc limit 3";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt;
+        }
+
         public function read_detail($id)
         {
-            $sql = "SELECT *, DATEDIFF(CURRENT_DATE, modify_date) as selisih_tgl from tb_trans_rooms where id_trans = '$id'";
+            $sql = "SELECT *, DATEDIFF(CURRENT_DATE, modify_date) as selisih_tgl from tb_trans_rooms a, tb_costumer b where a.id_costumer=b.id_costumer and a.id_trans = '$id'";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt;

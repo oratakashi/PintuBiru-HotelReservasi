@@ -15,11 +15,11 @@
             </ul>
             </li>
             <li class="menu-header">Administrator Menu</li>
-            <li class="dropdown <?php if($_GET['page']=='administrator'||$_GET['page']=='costumer'){echo "active";}?>">
+            <li class="dropdown <?php if($_GET['page']=='administrator'||$_GET['page']=='customer'){echo "active";}?>">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Kelola Pengguna</span></a>
                 <ul class="dropdown-menu">
                     <li class="<?php if($_GET['page']=='administrator'){echo "active";}?>"><a class="nav-link" href="administrator.html">Kelola Administrator</a></li>
-                    <li><a class="nav-link" href="customer.html">Kelola Costumer</a></li>
+                    <li class="<?php if($_GET['page']=='customer'){echo "active";}?>"><a class="nav-link" href="customer.html">Kelola Costumer</a></li>
                 </ul>
             </li>
             <li class="dropdown <?php if($_GET['page']=='kamar'||$_GET['page']=='food'){echo "active";}?>">
@@ -29,10 +29,10 @@
                 </ul>
             </li>
             <li class="menu-header">Transaksi</li>
-            <li class="dropdown">
+            <li class="dropdown <?php if($_GET['page']=='transaksi'){echo "active";}?>">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check"></i> <span>Lihat Transaksi</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="auth-forgot-password.html">Transaksi Sewa Kamar</a></li>
+                    <li class="<?php if($_GET['page']=='transaksi'){echo "active";}?>"><a href="transaksi.html">Transaksi Sewa Kamar</a></li>
                 </ul>
             </li>
         </ul>

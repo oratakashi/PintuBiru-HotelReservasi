@@ -52,10 +52,11 @@
             }elseif($_GET['modules']=='transaksi'){
                 $data = _getClass('Order')->read_detail($_GET['id'])->fetch(PDO::FETCH_ASSOC);
                 $result['id_trans'] = $data['id_trans'];
-                $result['check_in'] = date('Y-m-d', strtotime($data['check_in']));
-                $result['check_out'] = date('Y-m-d', strtotime($data['check_out']));
+                $result['check_in'] = date('d F Y', strtotime($data['check_in']));
+                $result['check_out'] = date('d F Y', strtotime($data['check_out']));
                 $result['id_room'] = $data['id_room'];
                 $result['id_costumer'] = $data['id_costumer'];
+                $result['nama_costumer'] = $data['nama_costumer'];
                 $result['total'] = $data['total'];
                 $result['status_trans'] = $data['status_trans'];
                 $result['modify_date'] = $data['modify_date'];

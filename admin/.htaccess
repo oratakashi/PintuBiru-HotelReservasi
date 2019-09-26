@@ -17,16 +17,16 @@ RewriteRule ^logout.html?$ logout.php [L]
 RewriteRule ^index.html?$ index.php [L]
 RewriteRule ^administrator.html?$ index.php?page=administrator [L]
 RewriteRule ^kamar.html?$ index.php?page=kamar [L]
-RewriteRule ^food.html?$ index.php?page=food [L]
+RewriteRule ^customer.html?$ index.php?page=customer [L]
+RewriteRule ^transaksi.html?$ index.php?page=transaksi [L]
 
 #Bagian WebService
 RewriteRule ^api/detail/administrator/([A-Za-z0-9-]+)?$ webservice.php?request=detail&modules=administrator&id=$1 [L]
 RewriteRule ^api/detail/kamar/([A-Za-z0-9-]+)?$ webservice.php?request=detail&modules=kamar&id=$1 [L]
-RewriteRule ^api/detail/food/([A-Za-z0-9-]+)?$ webservice.php?request=detail&modules=food&id=$1 [L]
 RewriteRule ^api/administrator/delete/([A-Za-z0-9-]+)?$ index.php?page=administrator&id=$1 [L]
 RewriteRule ^api/id/kamar?$ webservice.php?request=id&modules=kamar [L]
 RewriteRule ^api/delete/kamar/([A-Za-z0-9-]+)?$ webservice.php?request=delete&modules=kamar&id=$1 [L]
-RewriteRule ^api/delete/food/([A-Za-z0-9-]+)?$ webservice.php?request=delete&modules=food&id=$1 [L]
+RewriteRule ^api/detail/transaksi/([A-Za-z0-9-]+)?$ webservice.php?request=detail&modules=transaksi&id=$1 [L]
 
 
 #Menghandle Agar Tidak Nyasar / Redirect ke Halaman 404

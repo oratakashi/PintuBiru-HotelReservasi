@@ -12,10 +12,7 @@
         <img alt="image" src="../media/photo/<?= $_SESSION['photo'] ?>" class="rounded-circle mr-1">
         <div class="d-sm-none d-lg-inline-block">Hi, <?= $_SESSION['nama'] ?></div></a>
         <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-title"><?= $_SESSION['lev_user'] ?></div>
-            <a href="features-profile.html" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> Profile
-            </a>
+            <div class="dropdown-title"><?= $_SESSION['email'] ?></div>
             <div class="dropdown-divider"></div>
             <a href="logout.html" class="dropdown-item has-icon text-danger">
             <i class="fas fa-sign-out-alt"></i> Logout

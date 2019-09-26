@@ -85,8 +85,10 @@
           require 'page/administrator/index.php';
         }elseif($_GET['page']=='kamar'){
           require 'page/kamar/index.php';
-        }elseif($_GET['page']=='food'){
-          require 'page/resto/index.php';
+        }elseif($_GET['page']=='customer'){
+          require 'page/costumer/index.php';
+        }elseif($_GET['page']=='transaksi'){
+          require 'page/transaksi/index.php';
         }
       ?>
       
